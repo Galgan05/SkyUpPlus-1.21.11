@@ -30,6 +30,7 @@ public class SkyUpPlusClient implements ClientModInitializer {
 		Cooldown.handleCooldown();
 		MessageRemover.removeMessage();
 		HUD.renderHUD();
+		//Debug.debug();
 
 		// --- LOGGER ---
 		LOGGER.info("Successfully loaded SkyUpPlus!");

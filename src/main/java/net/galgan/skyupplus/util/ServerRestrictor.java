@@ -14,9 +14,7 @@ public class ServerRestrictor {
             }
         });
 
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            allowedServer = false;
-        });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> allowedServer = false);
     }
 
     public static boolean isAllowed() {

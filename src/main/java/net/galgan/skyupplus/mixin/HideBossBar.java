@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.Map;
 
 @Mixin(BossBarHud.class)
-public abstract class HideVanillaBossBar {
+public abstract class HideBossBar {
 
     @Unique
     private static final String[] ABILITY_NAMES = {

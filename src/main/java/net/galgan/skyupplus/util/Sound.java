@@ -12,17 +12,6 @@ public class Sound {
 
         if (client.player != null && client.world != null) {
 
-//            client.getSoundManager().play(
-//                    new PositionedSoundInstance(
-//                            sound,
-//                            soundCategory,
-//                            1.0f,
-//                            pitch,
-//                            client.world.random,
-//                            client.player.getX(), client.player.getY(), client.player.getZ()
-//                    )
-//            );
-
             client.getSoundManager().play(
                     new PositionedSoundInstance(
                         sound.id(),

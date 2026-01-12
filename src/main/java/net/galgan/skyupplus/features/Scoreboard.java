@@ -60,7 +60,7 @@ public class Scoreboard {
             if (line.getString().startsWith(" §a§5")) continue;
 
             if (line.getString().startsWith("  » ")) {
-                line = dropLeadingChars(line, 4);
+                line = dropLeadingChars(line);
             }
 
             lines.add(line);
@@ -69,9 +69,9 @@ public class Scoreboard {
         return lines;
     }
 
-    private static Text dropLeadingChars(Text text, int charsToDrop) {
+    private static Text dropLeadingChars(Text text) {
         MutableText result = Text.empty();
-        int[] remaining = { charsToDrop };
+        int[] remaining = {4};
 
         text.visit((Style style, String segment) -> {
             if (segment.isEmpty()) return Optional.empty();

@@ -22,15 +22,6 @@ public class HUD {
         );
     }
 
-    public static void renderCrates() {
-
-        HudElementRegistry.attachElementBefore(
-                VanillaHudElements.CHAT,
-                Identifier.of("skyupplus", "hud"),
-                HUD::render
-        );
-    }
-
     public static void render(DrawContext ctx, RenderTickCounter counter) {
         if(!ServerRestrictor.isAllowed()) return;
 

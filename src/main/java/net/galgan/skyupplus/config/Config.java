@@ -28,7 +28,7 @@ public class Config {
 
     // --- SHARED ---
     public enum ConditionalDisplayBehavior {HOLDING_ITEM, ALWAYS, NEVER}
-    public enum DisplayLocation {TOP_LEFT, MIDDLE_LEFT, BOTTOM_LEFT, TOP_RIGHT, MIDDLE_RIGHT, BOTTOM_RIGHT;}
+    public enum DisplayLocation {TOP_LEFT, MIDDLE_LEFT, BOTTOM_LEFT, TOP_RIGHT, MIDDLE_RIGHT, BOTTOM_RIGHT}
     public enum MainSound {BELL, GOAT_HORN, WITHER, CHALLENGE}
     public enum CountdownSound {EXP, CLICK, EIGHT_BIT, NOTEBLOCK}
     public enum WarningSound {PLING, TUBE, BASS, ANVIL}
@@ -39,6 +39,9 @@ public class Config {
 
     // --- REQUIREMENTS ---
     @SerialEntry public DisplayLocation requirementsDisplayLocation = DisplayLocation.TOP_LEFT;
+
+    // --- STORAGE ---
+    @SerialEntry public boolean showFullStorages = true;
 
     // --- REMINDERS ---
     @SerialEntry public boolean toggleReminders = true;
@@ -51,7 +54,7 @@ public class Config {
 
     @SerialEntry public DisplayLocation remindersDisplayLocation = DisplayLocation.BOTTOM_LEFT;
 
-    // --- Chat ---
+    // --- CHAT ---
     @SerialEntry public boolean disableAnnouncements = false;
     @SerialEntry public boolean shortenAuctions = false;
     @SerialEntry public boolean shortenPechowiec = false;

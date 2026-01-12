@@ -3,7 +3,7 @@ package net.galgan.skyupplus.features;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.galgan.skyupplus.config.Config;
-import net.galgan.skyupplus.mixin.BossBarHudAccessor;
+import net.galgan.skyupplus.mixin.BossBarAccessor;
 import net.galgan.skyupplus.util.Chat;
 import net.galgan.skyupplus.util.ServerRestrictor;
 import net.galgan.skyupplus.util.Sound;
@@ -112,7 +112,7 @@ public class Cooldown {
         long currentTime = Instant.now().getEpochSecond();
 
         //Loop through every boss bar
-        for (ClientBossBar bar : ((BossBarHudAccessor) hud).getBossBarsMap().values()) {
+        for (ClientBossBar bar : ((BossBarAccessor) hud).getBossBarsMap().values()) {
             String title = bar.getName().getString();
 
             //Check if its name is on the list
@@ -170,7 +170,6 @@ public class Cooldown {
                     //Get the pitch
                     float pitch = switch (time) {
                         case 3 -> 0.9f;
-                        case 2 -> 1.0f;
                         case 1 -> 1.1f;
                         default -> 1.0f;
                     };

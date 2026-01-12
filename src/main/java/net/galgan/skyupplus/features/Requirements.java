@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
 import net.galgan.skyupplus.config.Config;
-import net.galgan.skyupplus.mixin.HandledScreenAccess;
+import net.galgan.skyupplus.mixin.HandledScreenAccessor;
 import net.galgan.skyupplus.util.Chat;
 import net.galgan.skyupplus.util.ServerRestrictor;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -95,7 +95,7 @@ public class Requirements {
     }
 
     private static Slot getSlotAt(HandledScreen<?> screen, double x, double y) {
-        return ((HandledScreenAccess) screen).invokeGetSlotAt(x, y);
+        return ((HandledScreenAccessor) screen).invokeGetSlotAt(x, y);
     }
 
     private static void nullVariables() {

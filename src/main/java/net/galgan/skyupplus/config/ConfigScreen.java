@@ -75,6 +75,15 @@ public final class ConfigScreen {
                 )
                 .build();
 
+        Option<Boolean> showFullStorages = Option.<Boolean>createBuilder()
+                .name(Text.literal("Pokazuj pełne magazyny"))
+                .description(OptionDescription.of(
+                        Text.literal("Pokazuje pełne magazyny w menu kontrolera magazynów").formatted(Formatting.GRAY)
+                ))
+                .binding(true, () -> cfg.showFullStorages, v -> cfg.showFullStorages = v)
+                .controller(TickBoxControllerBuilder::create)
+                .build();
+
         // --- REMINDERS ---
         // --- REMINDERS ---
         // --- REMINDERS ---
@@ -1033,6 +1042,10 @@ public final class ConfigScreen {
                         .group(OptionGroup.createBuilder()
                                 .name(Text.literal("Wymagania"))
                                 .option(requirementsDisplayLocation)
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.literal("Kontroler magazynow"))
+                                .option(showFullStorages)
                                 .build())
                         .group(OptionGroup.createBuilder()
                                 .name(Text.literal("Przypominajki"))

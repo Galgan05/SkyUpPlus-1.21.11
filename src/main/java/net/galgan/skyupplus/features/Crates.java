@@ -256,9 +256,7 @@ public class Crates {
             }
 
             if (!body.isEmpty()) {
-                ScreenEvents.afterRender(screen).register((s, ctx, mouseX, mouseY, delta) -> {
-                    DrawUtil.drawWidget(ctx, color, Config.DisplayLocation.MIDDLE_LEFT, body);
-                });
+                ScreenEvents.afterRender(screen).register((s, ctx, mouseX, mouseY, delta) -> DrawUtil.drawWidget(ctx, color, Config.DisplayLocation.MIDDLE_LEFT, body));
             }
         });
 
@@ -274,217 +272,353 @@ public class Crates {
                 //RYBACKA
                 if (message.getString().startsWith("SkyCase » Wygrano: Oceaniczna ruda")) {
                     Config.get().oceanicznaRudaDropped += 1;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 2x Oceaniczna ruda")) {
                     Config.get().oceanicznaRudaDropped += 2;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 3x Oceaniczna ruda")) {
                     Config.get().oceanicznaRudaDropped += 3;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: Wybitna przynęta")) {
                     Config.get().wybitnaPrzynetaDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: Dobra przynęta")) {
                     Config.get().dobraPrzynetaDropped += 1;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 2x Dobra przynęta")) {
                     Config.get().dobraPrzynetaDropped += 2;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 3x Dobra przynęta")) {
                     Config.get().dobraPrzynetaDropped += 3;
+                    Config.save();
+                    return;
                 }
 
                 //PLATINUM
                 if (message.getString().startsWith("SkyCase » Wygrano: Klucz do Elementium")) {
                     Config.get().elementiumDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: Zaklęta książka (Naprawa I)")) {
                     Config.get().mendingDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: Blok szmaragdu")) {
                     Config.get().emeraldBlockDropped += 1;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 2x Blok szmaragdu")) {
                     Config.get().emeraldBlockDropped += 2;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 3x Blok szmaragdu")) {
                     Config.get().emeraldBlockDropped += 3;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 4x Blok szmaragdu")) {
                     Config.get().emeraldBlockDropped += 4;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 5x Blok szmaragdu")) {
                     Config.get().emeraldBlockDropped += 5;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: Blok złota")) {
                     Config.get().goldBlockDropped += 1;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 2x Blok złota")) {
                     Config.get().goldBlockDropped += 2;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 3x Blok złota")) {
                     Config.get().goldBlockDropped += 3;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 4x Blok złota")) {
                     Config.get().goldBlockDropped += 4;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 5x Blok złota")) {
                     Config.get().goldBlockDropped += 5;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 6x Blok złota")) {
                     Config.get().goldBlockDropped += 6;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 7x Blok złota")) {
                     Config.get().goldBlockDropped += 7;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: Blok żelaza")) {
                     Config.get().ironBlockDropped += 1;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 2x Blok żelaza")) {
                     Config.get().ironBlockDropped += 2;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 3x Blok żelaza")) {
                     Config.get().ironBlockDropped += 3;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 4x Blok żelaza")) {
                     Config.get().ironBlockDropped += 4;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 5x Blok żelaza")) {
                     Config.get().ironBlockDropped += 5;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 6x Blok żelaza")) {
                     Config.get().ironBlockDropped += 6;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: Blok redstone")) {
                     Config.get().redstoneBlockDropped += 1;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 2x Blok redstone")) {
                     Config.get().redstoneBlockDropped += 2;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 3x Blok redstone")) {
                     Config.get().redstoneBlockDropped += 3;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 4x Blok redstone")) {
                     Config.get().redstoneBlockDropped += 4;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 10x Ziemia")) {
                     Config.get().dirtDropped += 10;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 15x Ziemia")) {
-                    Config.get().dirtDropped += 15 ;
+                    Config.get().dirtDropped += 15;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 20x Ziemia")) {
-                    Config.get().dirtDropped += 20 ;
+                    Config.get().dirtDropped += 20;
+                    Config.save();
+                    return;
+
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 25x Ziemia")) {
-                    Config.get().dirtDropped += 25 ;
+                    Config.get().dirtDropped += 25;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 30x Ziemia")) {
-                    Config.get().dirtDropped += 30 ;
+                    Config.get().dirtDropped += 30;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 10x Blok trawy")) {
                     Config.get().grassBlockDropped += 10;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 20x Blok trawy")) {
                     Config.get().grassBlockDropped += 20;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 30x Blok trawy")) {
                     Config.get().grassBlockDropped += 30;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 10x Piasek")) {
                     Config.get().sandDropped += 10;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 20x Piasek")) {
                     Config.get().sandDropped += 20;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » Wygrano: 30x Piasek")) {
-                    Config.get().sandDropped += 30 ;
+                    Config.get().sandDropped += 30;
+                    Config.save();
+                    return;
                 }
 
                 //ELEMENTIUM
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Karambit ::")) {
                     Config.get().karambitDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Perun ::")) {
                     Config.get().perunDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Cymofan ::")) {
                     Config.get().cymofanDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Młot Thora ::")) {
                     Config.get().mlotThoraDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Urizel ::")) {
                     Config.get().urizelDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Azada ::")) {
                     Config.get().azadaDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Spinel ::")) {
                     Config.get().spinelDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Karpiołap ::")) {
                     Config.get().karpiolapDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Etherica ::")) {
                     Config.get().ethericaDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Łuk Legolasa ::")) {
                     Config.get().lukLegolasaDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Arbalet ::")) {
                     Config.get().arbaletDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Powrót Odysa ::")) {
                     Config.get().powrotOdysaDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Cassis ::")) {
                     Config.get().cassisDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Cuirass ::")) {
                     Config.get().cuirassDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Cuissot ::")) {
                     Config.get().cuissotDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Cosset ::")) {
                     Config.get().cossetDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Kapcie lotnika ::")) {
                     Config.get().kapcieLotnikaDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Rivendell ::")) {
                     Config.get().rivendellDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Impet ::")) {
                     Config.get().impetDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Phlox ::")) {
                     Config.get().phloxDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Majster ::")) {
                     Config.get().majsterDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Magiczne wiaderko ::")) {
                     Config.get().magiczneWiaderkoDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: StatTracker ::")) {
                     Config.get().statTrackerDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Jajko niespodzianka ::")) {
                     Config.get().jajkoNiespodziankaDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Klejnot kupiecki uniwersalny ::")) {
                     Config.get().klejnotKupieckiDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Kontroler magazynów ::")) {
                     Config.get().kontrolerMagazynowDropped++;
+                    Config.save();
+                    return;
                 }
                 if (message.getString().startsWith("SkyCase » " + playerName + " otworzył Elementium i wygrał: :: Tajemnice SkyUPa v.5 ::")) {
                     Config.get().tajemniceSkyUPaDropped++;
+                    Config.save();
                 }
-
-                Config.save();
             }
         });
     }

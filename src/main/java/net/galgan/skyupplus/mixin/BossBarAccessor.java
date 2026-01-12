@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Mixin(BossBarHud.class)
-public interface BossBarHudAccessor {
+public interface BossBarAccessor {
     @Accessor("bossBars")
     Map<UUID, ClientBossBar> getBossBarsMap();
 }
