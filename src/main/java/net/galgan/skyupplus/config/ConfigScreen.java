@@ -1068,6 +1068,7 @@ public final class ConfigScreen {
                 .category(ConfigCategory.createBuilder()
                         .name(Text.literal("Czat").formatted(Formatting.YELLOW, Formatting.BOLD))
                         .group(OptionGroup.createBuilder()
+                                .name(Text.literal("Czytelność czatu"))
                                 .option(disableAnnouncements)
                                 .option(disableCrouchingInfo)
                                 .option(disableForeignElementium)
