@@ -83,7 +83,7 @@ public class DrawUtil {
         int y = switch (displayLocation) {
             case TOP_LEFT, TOP_RIGHT -> 2;
             case MIDDLE_LEFT, MIDDLE_RIGHT -> (ctx.getScaledWindowHeight() - h - 4) / 2;
-            case BOTTOM_LEFT, BOTTOM_RIGHT -> ctx.getScaledWindowHeight() - h - 5;
+            case BOTTOM_LEFT, BOTTOM_RIGHT -> ctx.getScaledWindowHeight() - h - 6;
         };
 
         //Draw the border and text

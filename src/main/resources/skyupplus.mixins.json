@@ -9,7 +9,8 @@
 		"HideBossBar",
 		"OverlayMessageHook",
 		"HandledScreenDraw",
-		"HandledScreenAccessor"
+		"HandledScreenAccessor",
+		"CancelAnnouncementSound"
 	],
 	"injectors": {
 		"defaultRequire": 1

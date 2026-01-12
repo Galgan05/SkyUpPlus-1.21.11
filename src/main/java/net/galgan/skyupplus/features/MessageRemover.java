@@ -2,11 +2,15 @@ package net.galgan.skyupplus.features;
 
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.galgan.skyupplus.config.Config;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 
 import java.util.Set;
 
 public class MessageRemover {
+
+    private static String playerName;
 
     public static void removeMessage() {
         ClientReceiveMessageEvents.ALLOW_GAME.register((Text message, boolean overlay) -> {
@@ -26,6 +30,15 @@ public class MessageRemover {
             }
 
             if (Config.get().shortenPechowiec && PECHOWIEC.contains(msg)) {
+                return false;
+            }
+
+            MinecraftClient client = MinecraftClient.getInstance();
+            ClientPlayerEntity player = client.player;
+
+            if (player != null) playerName = player.getName().getString();
+
+            if(Config.get().disableForeignElementium && msg.startsWith("SkyCase » ") && msg.contains("otworzył Elementium i wygrał") && !msg.startsWith("SkyCase » " + playerName)) {
                 return false;
             }
 

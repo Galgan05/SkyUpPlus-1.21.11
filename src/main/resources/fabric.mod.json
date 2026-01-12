@@ -2,14 +2,22 @@
 	"schemaVersion": 1,
 	"id": "skyupplus",
 	"version": "${version}",
-	"name": "SkyUpPlus",
-	"description": "Mod na serwer SkyUP.pl mający na celu urozmaicenie rozgrywki.",
+	"name": "SkyUP+",
+	"description": "Mod na serwer SkyUP.pl mający na celu urozmaicić rozgrywkę. Mod nie jest w żadnym stopniu powiązany z administracją serwera.",
 	"authors": [
 		"Galgan"
 	],
 	"contact": {
-		"homepage": "https://discord.com/invite/6fwKWSCGZZ",
-		"sources": "https://github.com/Galgan05/SkyUpPlus-1.21.11"
+		"homepage": "https://modrinth.com/project/skyupplus",
+		"sources": "https://github.com/Galgan05/SkyUpPlus-1.21.11",
+		"issues": "https://github.com/Galgan05/SkyUpPlus-1.21.11/issues"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.com/invite/6fwKWSCGZZ"
+			}
+		}
 	},
 	"license": "MIT",
 	"icon": "assets/skyupplus/img.png",

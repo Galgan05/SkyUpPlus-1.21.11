@@ -171,6 +171,15 @@ public final class ConfigScreen {
                 .controller(TickBoxControllerBuilder::create)
                 .build();
 
+        Option<Boolean> disableForeignElementium = Option.<Boolean>createBuilder()
+                .name(Text.literal("Usuń cudzy drop z elementium"))
+                .description(OptionDescription.of(
+                        Text.literal("Wyłącza wyświetlanie cudzego dropu z elementium na czacie").formatted(Formatting.GRAY)
+                ))
+                .binding(false, () -> cfg.disableForeignElementium, v -> cfg.disableForeignElementium = v)
+                .controller(TickBoxControllerBuilder::create)
+                .build();
+
         Option<Boolean> shortenAuctions = Option.<Boolean>createBuilder()
                 .name(Text.literal("Skracaj aukcje"))
                 .description(OptionDescription.of(
@@ -1061,6 +1070,7 @@ public final class ConfigScreen {
                         .group(OptionGroup.createBuilder()
                                 .option(disableAnnouncements)
                                 .option(disableCrouchingInfo)
+                                .option(disableForeignElementium)
                                 .option(shortenAuctions)
                                 .option(shortenPechowiec)
                                 .build())

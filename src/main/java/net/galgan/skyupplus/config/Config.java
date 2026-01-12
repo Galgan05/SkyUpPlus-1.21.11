@@ -56,9 +56,10 @@ public class Config {
 
     // --- CHAT ---
     @SerialEntry public boolean disableAnnouncements = false;
+    @SerialEntry public boolean disableCrouchingInfo = false;
+    @SerialEntry public boolean disableForeignElementium = false;
     @SerialEntry public boolean shortenAuctions = false;
     @SerialEntry public boolean shortenPechowiec = false;
-    @SerialEntry public boolean disableCrouchingInfo = false;
 
     // --- WARNINGS ---
     @SerialEntry public boolean togglePlugWarning = false;
