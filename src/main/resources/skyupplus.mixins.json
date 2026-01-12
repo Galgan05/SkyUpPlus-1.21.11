@@ -1,0 +1,19 @@
+{
+	"required": true,
+	"package": "net.galgan.skyupplus.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"HideVanillaScoreboard",
+		"BossBarHudAccessor",
+		"TitleAccessor",
+		"HideVanillaBossBar",
+		"OverlayMessageHook",
+		"HandledScreenAccess"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

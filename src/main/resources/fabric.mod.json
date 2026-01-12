@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "skyupplus",
+	"version": "${version}",
+	"name": "SkyUpPlus",
+	"description": "Mod na serwer SkyUP.pl mający na celu urozmaicenie rozgrywki.",
+	"authors": [
+		"Galgan"
+	],
+	"contact": {
+		"homepage": "https://discord.com/invite/6fwKWSCGZZ",
+		"sources": "https://github.com/Galgan05/SkyUpPlus-1.21.11"
+	},
+	"license": "MIT",
+	"icon": "assets/skyupplus/img.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"net.galgan.skyupplus.SkyUpPlusClient"
+		],
+		"modmenu": [
+			"net.galgan.skyupplus.config.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"skyupplus.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"yet_another_config_lib_v3": ">=3.8.1+1.21.11-fabric"
+	}
+}

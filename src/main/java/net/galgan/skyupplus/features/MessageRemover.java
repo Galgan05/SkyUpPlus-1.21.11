@@ -1,0 +1,95 @@
+package net.galgan.skyupplus.features;
+
+import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
+import net.galgan.skyupplus.config.Config;
+import net.minecraft.text.Text;
+
+import java.util.Set;
+
+public class MessageRemover {
+
+    public static void removeMessage() {
+        ClientReceiveMessageEvents.ALLOW_GAME.register((Text message, boolean overlay) -> {
+
+            String msg = message.getString();
+
+            if (Config.get().disableAnnouncements && ANNOUNCEMENTS.contains(msg)) {
+                return false;
+            }
+
+            if (Config.get().disableCrouchingInfo && CROUCHING.contains(msg)) {
+                return false;
+            }
+
+            if (Config.get().shortenAuctions && AUCTIONS.contains(msg)) {
+                return false;
+            }
+
+            if (Config.get().shortenPechowiec && PECHOWIEC.contains(msg)) {
+                return false;
+            }
+
+            return true;
+        });
+    }
+
+    private static final Set<String> ANNOUNCEMENTS = Set.of(
+            "                 +-----------------------+",
+            "                                » SkyUP «",
+            "                                       ",
+            "                      Pomóż nam rozwijać serwer!",
+            "              Doładuj Tokeny i wydaj je pod /token!",
+            "                              skyup.pl/sklep",
+            "           Macro, skrypty i cheaty są surowo zakazane",
+            "                  i karane nawet usunięciem wyspy!",
+            "             Tokeny mozesz wydac w TokenShopie pod",
+            "                                   /token!",
+            "                      Bądź na bieżąco i zdobywaj",
+            "                       SkyPunkty na Discordzie!",
+            "                                dc.skyup.pl",
+            "                     Głosuj i zgarniaj SkyPunkty!",
+            "                                  /glosuj",
+            "                    Zbuduj ładną wyspę i zdobądź",
+            "                    nagrody w Galerii architektów!",
+            "                          skyup.pl/wiki/galeria",
+            "                        Rekrutacja na Helpera!",
+            "                               /rekrutacja",
+            "                  Szczegółowy regulamin serwera?",
+            "                                /regulamin",
+            "                              Masz problem?",
+            "                               /zgloszenia!",
+            "                                  UWAGA!",
+            "                  Kradzieże i oszustwa są zakazane!",
+            "               Potrzebujesz informacji o komendach,",
+            "                            bądź rozgrywce?",
+            "                    Skorzystaj z komendy /pomoc",
+            "                  Sprawdź panel gracza na stronie!",
+            "                              skyup.pl/panel",
+            "                    Nie wiesz jak coś wytworzyć?!",
+            "                            Sprawdź /recipe!",
+            "                     Szukasz informacji o grze?",
+            "                           Sprawdź naszą wiki!",
+            "                               skyup.pl/wiki"
+    );
+
+    private static final Set<String> CROUCHING = Set.of(
+            "Zegarek » Kucnij, by zebrać zegarek!",
+            "Magazyn » Kucnij, aby zebrać magazyn!",
+            "Piece » Musisz kucnąć, by podnieść piec.",
+            "SkyUP » Kucnij, aby wydobyć ametyst!"
+    );
+
+    private static final Set<String> AUCTIONS = Set.of(
+            "Aby zalicytować wpisz /licytuj [kwota/max].",
+            "Aby wyłączyć spam wpisz /a spam.",
+            "Aby ukryć tą aukcję wpisz /a ukryj."
+    );
+
+    private static final Set<String> PECHOWIEC = Set.of(
+            "Szczęściarz » Poszukuję szczęściarza...",
+            "Szczęściarz » Znalazłem!",
+            "Pechowiec » Poszukuję pechowca...",
+            "Pechowiec » Znalazłem!"
+    );
+}
+
