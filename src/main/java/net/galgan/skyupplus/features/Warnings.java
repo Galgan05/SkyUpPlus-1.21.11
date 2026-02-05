@@ -18,6 +18,9 @@ import net.minecraft.util.Formatting;
 
 import java.util.Set;
 
+import static net.galgan.skyupplus.features.Cooldown.states;
+
+
 public class Warnings {
 
     private static boolean playPlugWarning = false;
@@ -25,7 +28,7 @@ public class Warnings {
     public static void handleWarnings() {
 
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
-            if (!Config.get().togglePlugWarning || !ServerRestrictor.isAllowed() || Cooldown.isActivePlug) {
+            if (!Config.get().togglePlugWarning || !ServerRestrictor.isAllowed() || states.get(Cooldown.AbilityType.PLUG).isActive) {
                 return ActionResult.PASS;
             }
 

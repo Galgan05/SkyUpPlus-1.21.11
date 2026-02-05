@@ -58,6 +58,7 @@ public class Config {
     @SerialEntry public boolean disableAnnouncements = false;
     @SerialEntry public boolean disableCrouchingInfo = false;
     @SerialEntry public boolean disableForeignElementium = false;
+    @SerialEntry public boolean disableAFKInfo = false;
     @SerialEntry public boolean shortenAuctions = false;
     @SerialEntry public boolean shortenPechowiec = false;
 
@@ -71,24 +72,13 @@ public class Config {
 
     @SerialEntry public WarningSound warningSound = WarningSound.PLING;
 
-    // --- COOLDOWN ---
-    @SerialEntry public boolean abilityCooldown = true;
-    @SerialEntry public boolean dungeonCooldown = true;
+    // --- PRACE ---
+    @SerialEntry public boolean customAbilities = true;
+    @SerialEntry public boolean playAbilitiesSound = true;
+    @SerialEntry public boolean playDungeonSound = true;
 
-    @SerialEntry public boolean soundPlug = true;
-    @SerialEntry public boolean soundWiertlo = true;
-    @SerialEntry public boolean soundRozbiorka = true;
-    @SerialEntry public boolean soundPila = true;
-    @SerialEntry public boolean soundSieciRybackie = true;
-    @SerialEntry public boolean soundNawalnica = true;
-    @SerialEntry public boolean soundEskalacja = true;
-    @SerialEntry public boolean soundDungeon = true;
-
-    @SerialEntry public boolean onDungeonCooldown = false;
-    @SerialEntry public long nextEntryTime = -1L;
-
-    @SerialEntry public DisplayLocation cooldownDisplayLocation = DisplayLocation.BOTTOM_RIGHT;
-    @SerialEntry public MainSound abilitySound = MainSound.BELL;
+    @SerialEntry public DisplayLocation abilitiesDisplayLocation = DisplayLocation.BOTTOM_RIGHT;
+    @SerialEntry public MainSound abilitiesSound = MainSound.BELL;
     @SerialEntry public MainSound dungeonSound = MainSound.GOAT_HORN;
     @SerialEntry public CountdownSound countdownSound = CountdownSound.EXP;
 
@@ -157,6 +147,7 @@ public class Config {
     @SerialEntry public boolean grassBlockToggle = true;
     @SerialEntry public boolean sandToggle = true;
 
+    @SerialEntry public boolean czapkiToggle = true;
     @SerialEntry public boolean oceanicznaRudaToggle = true;
     @SerialEntry public boolean wybitnaPrzynetaToggle = true;
     @SerialEntry public boolean dobraPrzynetaToggle = true;
@@ -199,6 +190,13 @@ public class Config {
     @SerialEntry public int grassBlockDropped = 0;
     @SerialEntry public int sandDropped = 0;
 
+    @SerialEntry public int kaskGornikaDropped = 0;
+    @SerialEntry public int czapkaDrwalaDropped = 0;
+    @SerialEntry public int kapeluszFarmeraDropped = 0;
+    @SerialEntry public int bandanaLowcyDropped = 0;
+    @SerialEntry public int kaskBudowniczegoDropped = 0;
+    @SerialEntry public int kapeluszRybakaDropped = 0;
+    @SerialEntry public int kapeluszCzarodziejaDropped = 0;
     @SerialEntry public int oceanicznaRudaDropped = 0;
     @SerialEntry public int wybitnaPrzynetaDropped = 0;
     @SerialEntry public int dobraPrzynetaDropped = 0;

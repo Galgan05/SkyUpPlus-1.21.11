@@ -228,11 +228,71 @@ public class Crates {
                             .append(Text.literal(String.valueOf(Config.get().sandDropped)).formatted(Formatting.WHITE)));
                 }
                 body = bodyText;
-                
+
+            //GÓRNICZA
+            } else if (title.contains("\uE001\uE082\uE002") || title.contains("\uE001\uE172\uE002")) {
+                color = 0xFFAAAAAA;
+
+                if (Config.get().czapkiToggle) {
+                    bodyText.add(Text.empty()
+                            .append(Text.literal("Kask Górnika: ").formatted(Formatting.GRAY, Formatting.BOLD))
+                            .append(Text.literal(String.valueOf(Config.get().kaskGornikaDropped)).formatted(Formatting.WHITE)));
+                }
+                body = bodyText;
+
+            //DRWALA
+            } else if (title.contains("\uE001\uE083\uE002") || title.contains("\uE001\uE173\uE002")) {
+                color = 0xFF00AA00;
+
+                if (Config.get().czapkiToggle) {
+                    bodyText.add(Text.empty()
+                            .append(Text.literal("Czapka Drwala: ").formatted(Formatting.DARK_GREEN, Formatting.BOLD))
+                            .append(Text.literal(String.valueOf(Config.get().czapkaDrwalaDropped)).formatted(Formatting.WHITE)));
+                }
+                body = bodyText;
+
+            //FARMERSKA
+            } else if (title.contains("\uE001\uE084\uE002") || title.contains("\uE001\uE174\uE002")) {
+                color = 0xFFFFFF55;
+
+                if (Config.get().czapkiToggle) {
+                    bodyText.add(Text.empty()
+                            .append(Text.literal("Kapelusz Farmera: ").formatted(Formatting.YELLOW, Formatting.BOLD))
+                            .append(Text.literal(String.valueOf(Config.get().kapeluszFarmeraDropped)).formatted(Formatting.WHITE)));
+                }
+                body = bodyText;
+
+            //ŁOWIECKA
+            } else if (title.contains("\uE001\uE085\uE002") || title.contains("\uE001\uE175\uE002")) {
+                color = 0xFFFF5555;
+
+                if (Config.get().czapkiToggle) {
+                    bodyText.add(Text.empty()
+                            .append(Text.literal("Bandana Łowcy: ").formatted(Formatting.RED, Formatting.BOLD))
+                            .append(Text.literal(String.valueOf(Config.get().bandanaLowcyDropped)).formatted(Formatting.WHITE)));
+                }
+                body = bodyText;
+
+            //BUDOWLANA
+            } else if (title.contains("\uE001\uE086\uE002") || title.contains("\uE001\uE176\uE002")) {
+                color = 0xFF00AAAA;
+
+                if (Config.get().czapkiToggle) {
+                    bodyText.add(Text.empty()
+                            .append(Text.literal("Kask Budowniczego: ").formatted(Formatting.DARK_AQUA, Formatting.BOLD))
+                            .append(Text.literal(String.valueOf(Config.get().kaskBudowniczegoDropped)).formatted(Formatting.WHITE)));
+                }
+                body = bodyText;
+
             //RYBACKA
             } else if (title.contains("\uE001\uE087\uE002") || title.contains("\uE001\uE177\uE002")) {
                 color = 0xFF5555FF;
 
+                if (Config.get().czapkiToggle) {
+                    bodyText.add(Text.empty()
+                            .append(Text.literal("Kapelusz Rybaka: ").formatted(Formatting.BLUE, Formatting.BOLD))
+                            .append(Text.literal(String.valueOf(Config.get().kapeluszRybakaDropped)).formatted(Formatting.WHITE)));
+                }
                 if (Config.get().oceanicznaRudaToggle) {
                     bodyText.add(Text.empty()
                             .append(Text.literal("Oceaniczna ruda: ").formatted(Formatting.DARK_AQUA, Formatting.BOLD))
@@ -247,6 +307,17 @@ public class Crates {
                     bodyText.add(Text.empty()
                             .append(Text.literal("Dobra przynęta: ").formatted(Formatting.GOLD, Formatting.BOLD))
                             .append(Text.literal(String.valueOf(Config.get().dobraPrzynetaDropped)).formatted(Formatting.WHITE)));
+                }
+                body = bodyText;
+
+            //CZARODZIEJSKA
+            } else if (title.contains("\uE001\uE088\uE002") || title.contains("\uE001\uE178\uE002")) {
+                color = 0xFFFF55FF;
+
+                if (Config.get().czapkiToggle) {
+                    bodyText.add(Text.empty()
+                            .append(Text.literal("Kapelusz Czarodzieja: ").formatted(Formatting.LIGHT_PURPLE, Formatting.BOLD))
+                            .append(Text.literal(String.valueOf(Config.get().kapeluszCzarodziejaDropped)).formatted(Formatting.WHITE)));
                 }
                 body = bodyText;
 
@@ -269,7 +340,41 @@ public class Crates {
 
                 if (player != null) playerName = player.getName().getString();
 
-                //RYBACKA
+                //OTHERS
+                if (message.getString().startsWith("SkyCase » Wygrano: Kask Górnika")) {
+                    Config.get().kaskGornikaDropped += 1;
+                    Config.save();
+                    return;
+                }
+                if (message.getString().startsWith("SkyCase » Wygrano: Czapka Drwala")) {
+                    Config.get().czapkaDrwalaDropped += 1;
+                    Config.save();
+                    return;
+                }
+                if (message.getString().startsWith("SkyCase » Wygrano: Kapelusz Farmera")) {
+                    Config.get().kapeluszFarmeraDropped += 1;
+                    Config.save();
+                    return;
+                }
+                if (message.getString().startsWith("SkyCase » Wygrano: Bandana Łowcy")) {
+                    Config.get().bandanaLowcyDropped += 1;
+                    Config.save();
+                    return;
+                }if (message.getString().startsWith("SkyCase » Wygrano: Kask Budowniczego")) {
+                    Config.get().kaskBudowniczegoDropped += 1;
+                    Config.save();
+                    return;
+                }
+                if (message.getString().startsWith("SkyCase » Wygrano: Kapelusz Rybaka")) {
+                    Config.get().kapeluszRybakaDropped += 1;
+                    Config.save();
+                    return;
+                }
+                if (message.getString().startsWith("SkyCase » Wygrano: Kapelusz Czarodzieja")) {
+                    Config.get().kapeluszCzarodziejaDropped += 1;
+                    Config.save();
+                    return;
+                }
                 if (message.getString().startsWith("SkyCase » Wygrano: Oceaniczna ruda")) {
                     Config.get().oceanicznaRudaDropped += 1;
                     Config.save();

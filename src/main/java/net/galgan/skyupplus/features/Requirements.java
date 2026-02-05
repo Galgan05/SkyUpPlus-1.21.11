@@ -60,7 +60,7 @@ public class Requirements {
                     }
                 }
 
-                if (!((name.getString().startsWith("» ") && !handled.getTitle().getString().equals("\uE003\uE150\uE002Wyzwania")) || name.getString().equals("» Zadanie codzienne «"))) {
+                if (!name.getString().startsWith("» ") || DISALLOWED_NAMES.contains(name.getString())) {
                     nullVariables();
                     return;
                 }
@@ -114,7 +114,7 @@ public class Requirements {
 
             if (!s.isEmpty()) {
                 if (s.startsWith("▪")) {
-                    if (s.startsWith("▪ Opis") || s.startsWith("▪ Zalecane") || s.startsWith("▪ Za ukończenie") || s.startsWith("▪ LPM") || s.startsWith("▪ Uwaga") || s.startsWith("▪ Kategoria") || s.startsWith("▪ Ukończone") || s.startsWith("▪ Następny")) {
+                    if (SKIPPED_CATEGORIES.stream().anyMatch(s::startsWith)) {
                         addNext = false;
                     } else {
                         filtered.add(line);
@@ -166,6 +166,33 @@ public class Requirements {
 
         return new ArrayList<>(bodyText);
     }
+
+    public static final Set<String> DISALLOWED_NAMES = Set.of(
+            "» Informacje «",
+            "» Wróć «",
+            "» Wyjście «",
+            "» Nowicjusz «",
+            "» Wtajemniczony «",
+            "» Zaawansowany «",
+            "» Znawca «",
+            "» Ekspert «",
+            "» Mistrz «",
+            "» Guru «",
+            "» Legenda «",
+            "» Wirtuoz «",
+            "» Bonus «"
+    );
+
+    public static final Set<String> SKIPPED_CATEGORIES = Set.of(
+            "▪ Opis",
+            "▪ Zalecane«",
+            "▪ Za ukończenie",
+            "▪ LPM",
+            "▪ Uwaga",
+            "▪ Kategoria",
+            "▪ Ukończone",
+            "▪ Następny"
+    );
 
     private static final Set<String> CONTAINER_TITLES = Set.of(
             "\uE003\uE150\uE002Wyzwania",

@@ -180,6 +180,15 @@ public final class ConfigScreen {
                 .controller(TickBoxControllerBuilder::create)
                 .build();
 
+        Option<Boolean> disableAFKInfo = Option.<Boolean>createBuilder()
+                .name(Text.literal("Usuń informację o AFK"))
+                .description(OptionDescription.of(
+                        Text.literal("Wyłącza wyświetlanie informacji o byciu afk").formatted(Formatting.GRAY)
+                ))
+                .binding(false, () -> cfg.disableAFKInfo, v -> cfg.disableAFKInfo = v)
+                .controller(TickBoxControllerBuilder::create)
+                .build();
+
         Option<Boolean> shortenAuctions = Option.<Boolean>createBuilder()
                 .name(Text.literal("Skracaj aukcje"))
                 .description(OptionDescription.of(
@@ -274,34 +283,23 @@ public final class ConfigScreen {
         // --- COOLDOWN ---
         // --- COOLDOWN ---
 
-        Option<Boolean> abilityCooldown = Option.<Boolean>createBuilder()
-                .name(Text.literal("Cooldown umiejętności"))
+        Option<Boolean> customAbilities = Option.<Boolean>createBuilder()
+                .name(Text.literal("Customowe umiejętności"))
                 .description(OptionDescription.of(
-                        Text.literal("Włącza wyświetlanie customowego cooldownu umiejętności").formatted(Formatting.GRAY),
+                        Text.literal("Włącza wyświetlanie customowych umiejętności").formatted(Formatting.GRAY),
                         Text.empty(),
-                        Text.literal("Możlwiość wyłączenia dodana z myślą o tych, co preferują domyślny wygląd cooldownu").formatted(Formatting.GRAY)
+                        Text.literal("Możlwiość wyłączenia dodana z myślą o tych, co preferują domyślny wygląd umiejętności").formatted(Formatting.GRAY)
                 ))
-                .binding(true, () -> cfg.abilityCooldown, v -> cfg.abilityCooldown = v)
+                .binding(true, () -> cfg.customAbilities, v -> cfg.customAbilities = v)
                 .controller(TickBoxControllerBuilder::create)
                 .build();
 
-        Option<Boolean> dungeonCooldown = Option.<Boolean>createBuilder()
-                .name(Text.literal("Cooldown dungeonu"))
+        Option<Config.DisplayLocation> abilitiesDisplayLocation = Option.<Config.DisplayLocation>createBuilder()
+                .name(Text.literal("Pozycja umiejętności"))
                 .description(OptionDescription.of(
-                        Text.literal("Włącza wyświetlanie customowego cooldownu dungeonu").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("Możlwiość wyłączenia dodana z myślą o tych, co preferują domyślny wygląd cooldownu").formatted(Formatting.GRAY)
+                        Text.literal("Zmienia pozycję wyświetlania customowych umiejętności").formatted(Formatting.GRAY)
                 ))
-                .binding(true, () -> cfg.dungeonCooldown, v -> cfg.dungeonCooldown = v)
-                .controller(TickBoxControllerBuilder::create)
-                .build();
-
-        Option<Config.DisplayLocation> cooldownDisplayLocation = Option.<Config.DisplayLocation>createBuilder()
-                .name(Text.literal("Pozycja customowego cooldownu"))
-                .description(OptionDescription.of(
-                        Text.literal("Zmienia pozycję wyświetlania customowego cooldownu").formatted(Formatting.GRAY)
-                ))
-                .binding(Config.DisplayLocation.BOTTOM_RIGHT, () -> cfg.cooldownDisplayLocation, v -> cfg.cooldownDisplayLocation = v)
+                .binding(Config.DisplayLocation.BOTTOM_RIGHT, () -> cfg.abilitiesDisplayLocation, v -> cfg.abilitiesDisplayLocation = v)
                 .controller(opt -> EnumControllerBuilder.create(opt)
                         .enumClass(Config.DisplayLocation.class)
                         .formatValue(v -> switch (v) {
@@ -315,12 +313,12 @@ public final class ConfigScreen {
                 )
                 .build();
 
-        Option<Config.MainSound> abilitySound = Option.<Config.MainSound>createBuilder()
+        Option<Config.MainSound> abilitiesSound = Option.<Config.MainSound>createBuilder()
                 .name(Text.literal("Dźwięk umiejętności"))
                 .description(OptionDescription.of(
                         Text.literal("Ustawia dźwięk odtwarzany po zakończeniu umiejętności lub jej cooldownu").formatted(Formatting.GRAY)
                 ))
-                .binding(Config.MainSound.BELL, () -> cfg.abilitySound, v -> cfg.abilitySound = v)
+                .binding(Config.MainSound.BELL, () -> cfg.abilitiesSound, v -> cfg.abilitiesSound = v)
                 .controller(opt -> EnumControllerBuilder.create(opt)
                         .enumClass(Config.MainSound.class)
                         .formatValue(v -> switch (v) {
@@ -333,7 +331,7 @@ public final class ConfigScreen {
                 .build();
 
         Option<Config.MainSound> dungeonSound = Option.<Config.MainSound>createBuilder()
-                .name(Text.literal("Dżwięk dungeonu"))
+                .name(Text.literal("Dźwięk dungeonu"))
                 .description(OptionDescription.of(
                         Text.literal("Ustawia dźwięk odtwarzany po zakończeniu cooldownu dungeonu").formatted(Formatting.GRAY)
                 ))
@@ -350,7 +348,7 @@ public final class ConfigScreen {
                 .build();
 
         Option<Config.CountdownSound> countdownSound = Option.<Config.CountdownSound>createBuilder()
-                .name(Text.literal("Dżwięk odliczania"))
+                .name(Text.literal("Dźwięk odliczania"))
                 .description(OptionDescription.of(
                         Text.literal("Ustawia dźwięk odtwarzany podczas odliczania do końca umiejętności").formatted(Formatting.GRAY)
                 ))
@@ -366,107 +364,27 @@ public final class ConfigScreen {
                 )
                 .build();
 
-        Option<Boolean> soundPlug = Option.<Boolean>createBuilder()
-                .name(Text.literal("Pług"))
+        Option<Boolean> playAbilitiesSound = Option.<Boolean>createBuilder()
+                .name(Text.literal("Umiejętności"))
                 .description(OptionDescription.of(
-                        Text.literal("Dodaje dźwięk odliczania na ostatnie 3 sekundy pługu").formatted(Formatting.GRAY),
+                        Text.literal("Dodaje dźwięk odliczania na ostatnie 3 sekundy umiejętności").formatted(Formatting.GRAY),
                         Text.empty(),
-                        Text.literal("Dodatkowo dodaje powiadomienie o skończeniu się cooldownu").formatted(Formatting.GRAY),
+                        Text.literal("Dodatkowo gra dźwięk kiedy skończy się cooldown umiejętności").formatted(Formatting.GRAY),
                         Text.empty(),
                         Text.literal("UWAGA! Jeżeli chcesz usłyszeć dźwięk odliczania musisz mieć włączony dźwięk w ustawieniach!").formatted(Formatting.RED)
                 ))
-                .binding(true, () -> cfg.soundPlug, v -> cfg.soundPlug = v)
+                .binding(true, () -> cfg.playAbilitiesSound, v -> cfg.playAbilitiesSound = v)
                 .controller(TickBoxControllerBuilder::create)
                 .build();
 
-        Option<Boolean> soundWiertlo = Option.<Boolean>createBuilder()
-                .name(Text.literal("Wiertło"))
-                .description(OptionDescription.of(
-                        Text.literal("Dodaje dźwięk odliczania na ostatnie 3 sekundy wiertła").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("Dodatkowo dodaje powiadomienie o skończeniu się cooldownu").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("UWAGA! Jeżeli chcesz usłyszeć dźwięk odliczania musisz mieć włączony dźwięk w ustawieniach!").formatted(Formatting.RED)
-                ))
-                .binding(true, () -> cfg.soundWiertlo, v -> cfg.soundWiertlo = v)
-                .controller(TickBoxControllerBuilder::create)
-                .build();
-
-        Option<Boolean> soundRozbiorka = Option.<Boolean>createBuilder()
-                .name(Text.literal("Rozbiórka"))
-                .description(OptionDescription.of(
-                        Text.literal("Dodaje dźwięk odliczania na ostatnie 3 sekundy rozbiórki").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("Dodatkowo dodaje powiadomienie o skończeniu się cooldownu").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("UWAGA! Jeżeli chcesz usłyszeć dźwięk odliczania musisz mieć włączony dźwięk w ustawieniach!").formatted(Formatting.RED)
-                ))
-                .binding(true, () -> cfg.soundRozbiorka, v -> cfg.soundRozbiorka = v)
-                .controller(TickBoxControllerBuilder::create)
-                .build();
-
-        Option<Boolean> soundPila = Option.<Boolean>createBuilder()
-                .name(Text.literal("Piła"))
-                .description(OptionDescription.of(
-                        Text.literal("Dodaje dźwięk odliczania na ostatnie 3 sekundy piły").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("Dodatkowo dodaje powiadomienie o skończeniu się cooldownu").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("UWAGA! Jeżeli chcesz usłyszeć dźwięk odliczania musisz mieć włączony dźwięk w ustawieniach!").formatted(Formatting.RED)
-                ))
-                .binding(true, () -> cfg.soundPila, v -> cfg.soundPila = v)
-                .controller(TickBoxControllerBuilder::create)
-                .build();
-
-        Option<Boolean> soundSieciRybackie = Option.<Boolean>createBuilder()
-                .name(Text.literal("Sieci rybackie"))
-                .description(OptionDescription.of(
-                        Text.literal("Dodaje dźwięk odliczania na ostatnie 3 sekundy rybackich").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("Dodatkowo dodaje powiadomienie o skończeniu się cooldownu").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("UWAGA! Jeżeli chcesz usłyszeć dźwięk odliczania musisz mieć włączony dźwięk w ustawieniach!").formatted(Formatting.RED)
-                ))
-                .binding(true, () -> cfg.soundSieciRybackie, v -> cfg.soundSieciRybackie = v)
-                .controller(TickBoxControllerBuilder::create)
-                .build();
-
-        Option<Boolean> soundNawalnica = Option.<Boolean>createBuilder()
-                .name(Text.literal("Nawałnica"))
-                .description(OptionDescription.of(
-                        Text.literal("Dodaje dźwięk odliczania na ostatnie 3 sekundy nawałnicy").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("Dodatkowo dodaje powiadomienie o skończeniu się cooldownu").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("UWAGA! Jeżeli chcesz usłyszeć dźwięk odliczania musisz mieć włączony dźwięk w ustawieniach!").formatted(Formatting.RED)
-                ))
-                .binding(true, () -> cfg.soundNawalnica, v -> cfg.soundNawalnica = v)
-                .controller(TickBoxControllerBuilder::create)
-                .build();
-
-        Option<Boolean> soundEskalacja = Option.<Boolean>createBuilder()
-                .name(Text.literal("Eskalacja"))
-                .description(OptionDescription.of(
-                        Text.literal("Dodaje dźwięk odliczania na ostatnie 3 sekundy eskalacji").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("Dodatkowo dodaje powiadomienie o skończeniu się cooldownu").formatted(Formatting.GRAY),
-                        Text.empty(),
-                        Text.literal("UWAGA! Jeżeli chcesz usłyszeć dźwięk odliczania musisz mieć włączony dźwięk w ustawieniach!").formatted(Formatting.RED)
-                ))
-                .binding(true, () -> cfg.soundEskalacja, v -> cfg.soundEskalacja = v)
-                .controller(TickBoxControllerBuilder::create)
-                .build();
-
-        Option<Boolean> soundDungeon = Option.<Boolean>createBuilder()
+        Option<Boolean> playDungeonSound = Option.<Boolean>createBuilder()
                 .name(Text.literal("Dungeon"))
                 .description(OptionDescription.of(
                         Text.literal("Gra dźwięk kiedy skończy się cooldown dungeonu").formatted(Formatting.GRAY),
                         Text.empty(),
-                        Text.literal("Dodatkowo wysyłą na czacie informację o tym").formatted(Formatting.GRAY),
-                        Text.empty(),
                         Text.literal("UWAGA! Jeżeli chcesz usłyszeć dźwięk odliczania musisz mieć włączony dźwięk w ustawieniach!").formatted(Formatting.RED)
                 ))
-                .binding(true, () -> cfg.soundDungeon, v -> cfg.soundDungeon = v)
+                .binding(true, () -> cfg.playDungeonSound, v -> cfg.playDungeonSound = v)
                 .controller(TickBoxControllerBuilder::create)
                 .build();
 
@@ -998,6 +916,17 @@ public final class ConfigScreen {
                 .controller(TickBoxControllerBuilder::create)
                 .build();
 
+        Option<Boolean> czapkiToggle = Option.<Boolean>createBuilder()
+                .name(Text.literal("Czapki"))
+                .description(OptionDescription.of(
+                        Text.literal("Wyświetla w statystykach łączną liczbę wydropionych czapek").formatted(Formatting.GRAY),
+                        Text.empty(),
+                        Text.literal("UWAGA! Przy zbyt dużych wielkościach interfejsu statystyki mogą wystawać poza ekran!").formatted(Formatting.RED)
+                ))
+                .binding(true, () -> cfg.czapkiToggle, v -> cfg.czapkiToggle = v)
+                .controller(TickBoxControllerBuilder::create)
+                .build();
+
         Option<Boolean> oceanicznaRudaToggle = Option.<Boolean>createBuilder()
                 .name(Text.literal("Oceaniczna ruda"))
                 .description(OptionDescription.of(
@@ -1072,6 +1001,7 @@ public final class ConfigScreen {
                                 .option(disableAnnouncements)
                                 .option(disableCrouchingInfo)
                                 .option(disableForeignElementium)
+                                .option(disableAFKInfo)
                                 .option(shortenAuctions)
                                 .option(shortenPechowiec)
                                 .build())
@@ -1092,32 +1022,26 @@ public final class ConfigScreen {
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
-                        .name(Text.literal("Cooldown").formatted(Formatting.BLUE, Formatting.BOLD))
+                        .name(Text.literal("Prace").formatted(Formatting.BLUE, Formatting.BOLD))
                         .group(OptionGroup.createBuilder()
-                                .name(Text.literal("Główne"))
-                                .option(abilityCooldown)
-                                .option(dungeonCooldown)
-                                .option(cooldownDisplayLocation)
-                                .option(abilitySound)
-                                .option(dungeonSound)
-                                .option(countdownSound)
+                                .name(Text.literal("Umiejętności"))
+                                .option(customAbilities)
+                                .option(abilitiesDisplayLocation)
                                 .build())
                         .group(OptionGroup.createBuilder()
                                 .name(Text.literal("Efekty dźwiękowe"))
-                                .option(soundPlug)
-                                .option(soundWiertlo)
-                                .option(soundRozbiorka)
-                                .option(soundPila)
-                                .option(soundSieciRybackie)
-                                .option(soundNawalnica)
-                                .option(soundEskalacja)
-                                .option(soundDungeon)
+                                .option(countdownSound)
+                                .option(abilitiesSound)
+                                .option(dungeonSound)
+                                .option(playAbilitiesSound)
+                                .option(playDungeonSound)
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.literal("Skrzynki").formatted(Formatting.LIGHT_PURPLE, Formatting.BOLD))
                         .group(OptionGroup.createBuilder()
-                                .name(Text.literal("Rybacka"))
+                                .name(Text.literal("Zwykłe"))
+                                .option(czapkiToggle)
                                 .option(oceanicznaRudaToggle)
                                 .option(wybitnaPrzynetaToggle)
                                 .option(dobraPrzynetaToggle)

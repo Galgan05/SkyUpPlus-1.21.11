@@ -25,6 +25,10 @@ public class MessageRemover {
                 return false;
             }
 
+            if (Config.get().disableAFKInfo && AFK.contains(msg)) {
+                return false;
+            }
+
             if (Config.get().shortenAuctions && AUCTIONS.contains(msg)) {
                 return false;
             }
@@ -82,7 +86,9 @@ public class MessageRemover {
             "                            Sprawdź /recipe!",
             "                     Szukasz informacji o grze?",
             "                           Sprawdź naszą wiki!",
-            "                               skyup.pl/wiki"
+            "                               skyup.pl/wiki",
+            "              Sprawdź listę dozwolonych dodatków na",
+            "                           skyup.pl/regulamin!"
     );
 
     private static final Set<String> CROUCHING = Set.of(
@@ -90,6 +96,11 @@ public class MessageRemover {
             "Magazyn » Kucnij, aby zebrać magazyn!",
             "Piece » Musisz kucnąć, by podnieść piec.",
             "SkyUP » Kucnij, aby wydobyć ametyst!"
+    );
+
+    private static final Set<String> AFK = Set.of(
+            "AFK » Jesteś teraz AFK!",
+            "AFK » Nie jesteś już AFK!"
     );
 
     private static final Set<String> AUCTIONS = Set.of(

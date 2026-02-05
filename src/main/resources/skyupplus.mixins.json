@@ -1,21 +1,22 @@
 {
-	"required": true,
-	"package": "net.galgan.skyupplus.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"client": [
-		"HideScoreboard",
-		"BossBarAccessor",
-		"TitleAccessor",
-		"HideBossBar",
-		"OverlayMessageHook",
-		"HandledScreenDraw",
-		"HandledScreenAccessor",
-		"CancelAnnouncementSound"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
+  "required": true,
+  "package": "net.galgan.skyupplus.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ActionBarAccessor",
+    "BossBarAccessor",
+    "CancelAnnouncementSound",
+    "HandledScreenAccessor",
+    "HandledScreenDraw",
+    "HideBossBar",
+    "HideScoreboard",
+    "OverlayMessageHook",
+    "TitleAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
 	}
 }

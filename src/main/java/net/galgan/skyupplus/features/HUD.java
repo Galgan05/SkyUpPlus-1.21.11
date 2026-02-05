@@ -25,8 +25,8 @@ public class HUD {
     public static void render(DrawContext ctx, RenderTickCounter counter) {
         if(!ServerRestrictor.isAllowed()) return;
 
-        if (!Cooldown.body.isEmpty() && (Config.get().abilityCooldown || Config.get().dungeonCooldown)) {
-            DrawUtil.drawWidget(ctx, 0xFF5555FF, Config.get().cooldownDisplayLocation, Cooldown.body);
+        if (!Cooldown.body.isEmpty() && (Config.get().customAbilities|| Config.get().customAbilities)) {
+            DrawUtil.drawWidget(ctx, 0xFF5555FF, Config.get().abilitiesDisplayLocation, Cooldown.body);
         }
 
         if (!Reminders.body.isEmpty() && Config.get().toggleReminders) {

@@ -17,18 +17,18 @@ public abstract class HideBossBar {
 
     @Unique
     private static final String[] ABILITY_NAMES = {
-            "Pług",
-            "Wiertło",
-            "Rozbiórka",
-            "Piła",
-            "Sieci",
-            "Nawałnica",
-            "Eskalacja"
+            "\uF011 Wiertło",
+            "\uF012 Piła",
+            "\uF013 Pług",
+            "\uF014 Nawałnica",
+            "\uF015 Rozbiórka",
+            "\uF016 Sieci rybackie",
+            "\uF017 Eskalacja"
     };
 
     @Unique
     private static boolean shouldHide(BossBar bar) {
-        if (!Config.get().abilityCooldown) return false;
+        if (!Config.get().customAbilities) return false;
 
         String name = bar.getName().getString();
         for (String prefix : ABILITY_NAMES) {
@@ -48,5 +48,6 @@ public abstract class HideBossBar {
         list.removeIf(v -> v instanceof BossBar bar && shouldHide(bar));
         return list;
     }
+
 }
 
