@@ -1,7 +1,6 @@
 package net.galgan.skyupplus.mixin;
 
 import net.galgan.skyupplus.config.Config;
-import net.galgan.skyupplus.features.Scoreboard;
 import net.galgan.skyupplus.util.ServerRestrictor;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;

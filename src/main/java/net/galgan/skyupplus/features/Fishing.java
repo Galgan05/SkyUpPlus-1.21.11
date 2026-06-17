@@ -3,7 +3,6 @@ package net.galgan.skyupplus.features;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.galgan.skyupplus.config.Config;
-import net.galgan.skyupplus.util.Chat;
 import net.galgan.skyupplus.util.ServerRestrictor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
