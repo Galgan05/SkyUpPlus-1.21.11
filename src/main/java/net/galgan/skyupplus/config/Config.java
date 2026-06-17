@@ -8,6 +8,8 @@ import net.minecraft.util.Identifier;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Config {
     public static ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
@@ -27,14 +29,14 @@ public class Config {
     }
 
     // --- SHARED ---
-    public enum ConditionalDisplayBehavior {HOLDING_ITEM, ALWAYS, NEVER}
+    public enum ConditionalDisplayBehavior {CONDITIONAL, ALWAYS, NEVER}
     public enum DisplayLocation {TOP_LEFT, MIDDLE_LEFT, BOTTOM_LEFT, TOP_RIGHT, MIDDLE_RIGHT, BOTTOM_RIGHT}
     public enum MainSound {BELL, GOAT_HORN, WITHER, CHALLENGE}
     public enum CountdownSound {EXP, CLICK, EIGHT_BIT, NOTEBLOCK}
     public enum WarningSound {PLING, TUBE, BASS, ANVIL}
 
     // --- SCOREBOARD ---
-    @SerialEntry public boolean customScoreboard = true;
+    @SerialEntry(comment = "=== Ustawienia Ogólne ===") public boolean customScoreboard = true;
     @SerialEntry public DisplayLocation scoreboardDisplayLocation = DisplayLocation.MIDDLE_RIGHT;
 
     // --- REQUIREMENTS ---
@@ -82,13 +84,17 @@ public class Config {
     @SerialEntry public MainSound dungeonSound = MainSound.GOAT_HORN;
     @SerialEntry public CountdownSound countdownSound = CountdownSound.EXP;
 
+    @SerialEntry public DisplayLocation skillsDisplayLocation = DisplayLocation.TOP_RIGHT;
+    @SerialEntry public ConditionalDisplayBehavior skillsDisplayBehavior = ConditionalDisplayBehavior.CONDITIONAL;
+
     // --- FISHING ---
-    @SerialEntry public boolean toggleNiewielka = true;
+    @SerialEntry(comment = "=== Rybak ===") public boolean toggleNiewielka = true;
     @SerialEntry public boolean togglePrzecietna = true;
     @SerialEntry public boolean toggleWymiarowa = true;
     @SerialEntry public boolean toggleOgromna = true;
     @SerialEntry public boolean toggleMamucia = true;
     @SerialEntry public boolean toggleSuma = true;
+    @SerialEntry public boolean toggleSashimi = true;
     @SerialEntry public boolean toggleZarobek = true;
     @SerialEntry public boolean toggleWaga = true;
     @SerialEntry public boolean toggleNajwieksza = true;
@@ -100,16 +106,17 @@ public class Config {
     @SerialEntry public int ogromnaCount = 0;
     @SerialEntry public int mamuciaCount = 0;
     @SerialEntry public int totalCount = 0;
+    @SerialEntry public int sashimiCount = 0;
     @SerialEntry public double totalEarned = 0;
     @SerialEntry public double totalWeight = 0;
     @SerialEntry public double biggestWeight = 0;
     @SerialEntry public double smallestWeight = 0;
 
     @SerialEntry public DisplayLocation fishingDisplayLocation = DisplayLocation.MIDDLE_LEFT;
-    @SerialEntry public ConditionalDisplayBehavior fishingDisplayBehavior = ConditionalDisplayBehavior.HOLDING_ITEM;
+    @SerialEntry public ConditionalDisplayBehavior fishingDisplayBehavior = ConditionalDisplayBehavior.CONDITIONAL;
 
     // --- CRATES ---
-    @SerialEntry public boolean karambitToggle = true;
+    @SerialEntry(comment = "=== Skrzynki ===") public boolean karambitToggle = true;
     @SerialEntry public boolean perunToggle = true;
     @SerialEntry public boolean cymofanToggle = true;
     @SerialEntry public boolean mlotThoraToggle = true;

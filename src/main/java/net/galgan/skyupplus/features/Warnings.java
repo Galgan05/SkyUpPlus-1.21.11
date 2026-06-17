@@ -25,7 +25,7 @@ public class Warnings {
 
     private static boolean playPlugWarning = false;
 
-    public static void handleWarnings() {
+    public static void register() {
 
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
             if (!Config.get().togglePlugWarning || !ServerRestrictor.isAllowed() || states.get(Cooldown.AbilityType.PLUG).isActive) {
@@ -104,7 +104,8 @@ public class Warnings {
             net.minecraft.block.Blocks.BEETROOTS,
             net.minecraft.block.Blocks.CARROTS,
             net.minecraft.block.Blocks.POTATOES,
-            net.minecraft.block.Blocks.NETHER_WART
+            net.minecraft.block.Blocks.NETHER_WART,
+            net.minecraft.block.Blocks.COCOA
     );
 
     private static boolean compareDurability(ItemStack stack, int durabilityThreshold) {

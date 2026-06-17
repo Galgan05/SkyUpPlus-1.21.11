@@ -283,6 +283,42 @@ public final class ConfigScreen {
         // --- COOLDOWN ---
         // --- COOLDOWN ---
 
+        Option<Config.ConditionalDisplayBehavior> skillsDisplayBehavior = Option.<Config.ConditionalDisplayBehavior>createBuilder()
+                .name(Text.literal("Statystyki prac"))
+                .description(OptionDescription.of(
+                        Text.literal("Zmienia kiedy mają się wyświetlać statystyki prac").formatted(Formatting.GRAY)
+                ))
+                .binding(Config.ConditionalDisplayBehavior.CONDITIONAL, () -> cfg.skillsDisplayBehavior, v -> cfg.skillsDisplayBehavior = v)
+                .controller(opt -> EnumControllerBuilder.create(opt)
+                        .enumClass(Config.ConditionalDisplayBehavior.class)
+                        .formatValue(v -> switch (v) {
+                            case CONDITIONAL -> Text.literal("Zdobywając expa").formatted(Formatting.YELLOW);
+                            case ALWAYS -> Text.literal("Zawsze").formatted(Formatting.GREEN);
+                            case NEVER -> Text.literal("Nigdy").formatted(Formatting.RED);
+                        })
+                )
+                .build();
+
+        Option<Config.DisplayLocation> skillsDisplayLocation = Option.<Config.DisplayLocation>createBuilder()
+                .name(Text.literal("Pozycja statystyk prac"))
+                .description(OptionDescription.of(
+                        Text.literal("Zmienia pozycję wyświetlania statystyk prac").formatted(Formatting.GRAY)
+                ))
+                .binding(Config.DisplayLocation.TOP_RIGHT, () -> cfg.skillsDisplayLocation, v -> cfg.skillsDisplayLocation = v)
+                .controller(opt -> EnumControllerBuilder.create(opt)
+                        .enumClass(Config.DisplayLocation.class)
+                        .formatValue(v -> switch (v) {
+                            case TOP_LEFT -> Text.literal("Lewy górny");
+                            case MIDDLE_LEFT -> Text.literal("Lewy środek");
+                            case BOTTOM_LEFT -> Text.literal("Lewy dolny");
+                            case TOP_RIGHT -> Text.literal("Prawy górny");
+                            case MIDDLE_RIGHT -> Text.literal("Prawy środek");
+                            case BOTTOM_RIGHT -> Text.literal("Prawy dolny");
+                        })
+                )
+                .build();
+
+
         Option<Boolean> customAbilities = Option.<Boolean>createBuilder()
                 .name(Text.literal("Customowe umiejętności"))
                 .description(OptionDescription.of(
@@ -397,11 +433,11 @@ public final class ConfigScreen {
                 .description(OptionDescription.of(
                         Text.literal("Zmienia kiedy ma się wyświetlać HUD rybaka").formatted(Formatting.GRAY)
                 ))
-                .binding(Config.ConditionalDisplayBehavior.HOLDING_ITEM, () -> cfg.fishingDisplayBehavior, v -> cfg.fishingDisplayBehavior = v)
+                .binding(Config.ConditionalDisplayBehavior.CONDITIONAL, () -> cfg.fishingDisplayBehavior, v -> cfg.fishingDisplayBehavior = v)
                 .controller(opt -> EnumControllerBuilder.create(opt)
                         .enumClass(Config.ConditionalDisplayBehavior.class)
                         .formatValue(v -> switch (v) {
-                            case HOLDING_ITEM -> Text.literal("Trzymając wędkę").formatted(Formatting.YELLOW);
+                            case CONDITIONAL -> Text.literal("Trzymając wędkę").formatted(Formatting.YELLOW);
                             case ALWAYS -> Text.literal("Zawsze").formatted(Formatting.GREEN);
                             case NEVER -> Text.literal("Nigdy").formatted(Formatting.RED);
                         })
@@ -478,6 +514,15 @@ public final class ConfigScreen {
                         Text.literal("Wyświetla w statystykach łączną liczbę złowionych ryb").formatted(Formatting.GRAY)
                 ))
                 .binding(true, () -> cfg.toggleSuma, v -> cfg.toggleSuma = v)
+                .controller(TickBoxControllerBuilder::create)
+                .build();
+
+        Option<Boolean> toggleSashimi = Option.<Boolean>createBuilder()
+                .name(Text.literal("Sashimi"))
+                .description(OptionDescription.of(
+                        Text.literal("Wyświetla w statystykach liczbę złowionych sashimi").formatted(Formatting.GRAY)
+                ))
+                .binding(true, () -> cfg.toggleSashimi, v -> cfg.toggleSashimi = v)
                 .controller(TickBoxControllerBuilder::create)
                 .build();
 
@@ -1024,6 +1069,11 @@ public final class ConfigScreen {
                 .category(ConfigCategory.createBuilder()
                         .name(Text.literal("Prace").formatted(Formatting.BLUE, Formatting.BOLD))
                         .group(OptionGroup.createBuilder()
+                                .name(Text.literal("Statystyki"))
+                                .option(skillsDisplayBehavior)
+                                .option(skillsDisplayLocation)
+                                .build())
+                        .group(OptionGroup.createBuilder()
                                 .name(Text.literal("Umiejętności"))
                                 .option(customAbilities)
                                 .option(abilitiesDisplayLocation)
@@ -1104,6 +1154,7 @@ public final class ConfigScreen {
                                 .option(toggleOgromna)
                                 .option(toggleMamucia)
                                 .option(toggleSuma)
+                                .option(toggleSashimi)
                                 .option(toggleZarobek)
                                 .option(toggleWaga)
                                 .option(toggleNajwieksza)

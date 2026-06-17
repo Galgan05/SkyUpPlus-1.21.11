@@ -1,6 +1,7 @@
 package net.galgan.skyupplus.features;
 
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.galgan.skyupplus.config.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -10,11 +11,9 @@ import java.util.Set;
 
 public class MessageRemover {
 
-    private static String playerName;
+    public static void register() {
 
-    public static void removeMessage() {
         ClientReceiveMessageEvents.ALLOW_GAME.register((Text message, boolean overlay) -> {
-
             String msg = message.getString();
 
             if (Config.get().disableAnnouncements && ANNOUNCEMENTS.contains(msg)) {
@@ -37,18 +36,47 @@ public class MessageRemover {
                 return false;
             }
 
-            MinecraftClient client = MinecraftClient.getInstance();
-            ClientPlayerEntity player = client.player;
+            if(Config.get().disableForeignElementium && msg.startsWith("SkyCase » ") && msg.contains("otworzył Elementium i wygrał")) {
+                MinecraftClient client = MinecraftClient.getInstance();
+                ClientPlayerEntity player = client.player;
 
-            if (player != null) playerName = player.getName().getString();
+                if (player == null) {
+                    return true;
+                }
 
-            if(Config.get().disableForeignElementium && msg.startsWith("SkyCase » ") && msg.contains("otworzył Elementium i wygrał") && !msg.startsWith("SkyCase » " + playerName)) {
-                return false;
+                if (!msg.startsWith("SkyCase » " + player.getName().getString())) {
+                    return false;
+                }
             }
 
             return true;
         });
     }
+
+    private static final Set<String> PECHOWIEC = Set.of(
+            "Szczęściarz » Poszukuję szczęściarza...",
+            "Szczęściarz » Znalazłem!",
+            "Pechowiec » Poszukuję pechowca...",
+            "Pechowiec » Znalazłem!"
+    );
+
+    private static final Set<String> AUCTIONS = Set.of(
+            "Aby zalicytować wpisz /licytuj [kwota/max].",
+            "Aby wyłączyć spam wpisz /a spam.",
+            "Aby ukryć tą aukcję wpisz /a ukryj."
+    );
+
+    private static final Set<String> AFK = Set.of(
+            "AFK » Jesteś teraz AFK!",
+            "AFK » Nie jesteś już AFK!"
+    );
+
+    private static final Set<String> CROUCHING = Set.of(
+            "Zegarek » Kucnij, by zebrać zegarek!",
+            "Magazyn » Kucnij, aby zebrać magazyn!",
+            "Piece » Musisz kucnąć, by podnieść piec.",
+            "SkyUP » Kucnij, aby wydobyć ametyst!"
+    );
 
     private static final Set<String> ANNOUNCEMENTS = Set.of(
             "                 +-----------------------+",
@@ -69,7 +97,7 @@ public class MessageRemover {
             "                    Zbuduj ładną wyspę i zdobądź",
             "                    nagrody w Galerii architektów!",
             "                          skyup.pl/wiki/galeria",
-            "                        Rekrutacja na Helpera!",
+            "              Rekrutacja na Helpera i Budowniczego!",
             "                               /rekrutacja",
             "                  Szczegółowy regulamin serwera?",
             "                                /regulamin",
@@ -90,30 +118,4 @@ public class MessageRemover {
             "              Sprawdź listę dozwolonych dodatków na",
             "                           skyup.pl/regulamin!"
     );
-
-    private static final Set<String> CROUCHING = Set.of(
-            "Zegarek » Kucnij, by zebrać zegarek!",
-            "Magazyn » Kucnij, aby zebrać magazyn!",
-            "Piece » Musisz kucnąć, by podnieść piec.",
-            "SkyUP » Kucnij, aby wydobyć ametyst!"
-    );
-
-    private static final Set<String> AFK = Set.of(
-            "AFK » Jesteś teraz AFK!",
-            "AFK » Nie jesteś już AFK!"
-    );
-
-    private static final Set<String> AUCTIONS = Set.of(
-            "Aby zalicytować wpisz /licytuj [kwota/max].",
-            "Aby wyłączyć spam wpisz /a spam.",
-            "Aby ukryć tą aukcję wpisz /a ukryj."
-    );
-
-    private static final Set<String> PECHOWIEC = Set.of(
-            "Szczęściarz » Poszukuję szczęściarza...",
-            "Szczęściarz » Znalazłem!",
-            "Pechowiec » Poszukuję pechowca...",
-            "Pechowiec » Znalazłem!"
-    );
 }
-

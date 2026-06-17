@@ -17,21 +17,22 @@ public class SkyUpPlusClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		// --- INITIALIZATION ---
 		Config.HANDLER.load();
-		ServerRestrictor.checkIfAllowed();
+		ServerRestrictor.register();
 		Commands.register();
 
 		// --- FEATURES ---
-		Scoreboard.handleScoreboard();
-		Fishing.handleFishing();
-		Requirements.handleRequirements();
-		Crates.handleCrates();
-		Reminders.handleReminders();
-		Warnings.handleWarnings();
-		Cooldown.handleCooldown();
-		MessageRemover.removeMessage();
-		HUD.renderHUD();
+		Scoreboard.register();
+		Fishing.register();
+		Requirements.register();
+		Crates.register();
+		Reminders.register();
+		Warnings.register();
+		Cooldown.register();
+		MessageRemover.register();
+		Skills.register();
+		HUD.register();
 
 		// --- LOGGER ---
-		LOGGER.info("Successfully loaded SkyUpPlus!");
+		LOGGER.info("Successfully loaded SUP!");
 	}
 }

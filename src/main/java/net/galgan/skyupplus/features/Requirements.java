@@ -25,7 +25,7 @@ public class Requirements {
     public static boolean isDisplayed;
     public static List<Text> body = new ArrayList<>();
 
-    public static void handleRequirements() {
+    public static void register() {
 
         ScreenEvents.BEFORE_INIT.register((client, screen, w, h) -> {
             if(!ServerRestrictor.isAllowed()) return;

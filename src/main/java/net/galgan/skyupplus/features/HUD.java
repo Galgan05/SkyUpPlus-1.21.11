@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 
 public class HUD {
 
-    public static void renderHUD() {
+    public static void register() {
 
         HudElementRegistry.attachElementBefore(
                 VanillaHudElements.CHAT,
@@ -26,7 +26,7 @@ public class HUD {
         if(!ServerRestrictor.isAllowed()) return;
 
         if (!Cooldown.body.isEmpty() && (Config.get().customAbilities|| Config.get().customAbilities)) {
-            DrawUtil.drawWidget(ctx, 0xFF5555FF, Config.get().abilitiesDisplayLocation, Cooldown.body);
+            DrawUtil.drawWidget(ctx, 0xFF55FF55, Config.get().abilitiesDisplayLocation, Cooldown.body);
         }
 
         if (!Reminders.body.isEmpty() && Config.get().toggleReminders) {
@@ -43,6 +43,10 @@ public class HUD {
 
         if (!Scoreboard.body.isEmpty() && Config.get().customScoreboard) {
             DrawUtil.drawWidget(ctx, 0xFFFFFF55, Config.get().scoreboardDisplayLocation, Scoreboard.body);
+        }
+
+        if (!Skills.body.isEmpty()) {
+            DrawUtil.drawWidget(ctx, 0xFF55FFFF, Config.get().skillsDisplayLocation, Skills.body);
         }
     }
 }

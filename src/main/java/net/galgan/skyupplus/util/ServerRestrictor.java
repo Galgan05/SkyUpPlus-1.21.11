@@ -6,7 +6,7 @@ import net.minecraft.client.network.ServerInfo;
 public class ServerRestrictor {
     private static boolean allowedServer = false;
 
-    public static void checkIfAllowed() {
+    public static void register() {
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             ServerInfo server = client.getCurrentServerEntry();
             if (server != null) {

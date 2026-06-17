@@ -52,6 +52,7 @@ public class Cooldown {
             for (AbilityType type : values()) {
                 if (message.contains(type.BOSS_BAR_PREFIX)) return type;
             }
+
             return null;
         }
     }
@@ -70,15 +71,13 @@ public class Cooldown {
         }
     }
 
-    public static void handleCooldown() {
-
+    public static void register() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-
             if (!ServerRestrictor.isAllowed()) return;
             if (client.player == null || client.inGameHud == null) return;
 
             // Get the current time in seconds
-            long currentTime = Instant.now().getEpochSecond();
+            long currentTime = System.currentTimeMillis() / 1000;
 
             // Reset all active flags (except for plug if it was activated less than 5 seconds ago)
             for (Cooldown.AbilityType type : Cooldown.AbilityType.values()) {
@@ -160,7 +159,7 @@ public class Cooldown {
                     .forEach(line -> {
                         if(line.time >= 0) {
                             bodyText.add(Text.empty()
-                                    .append(Text.literal(line.ability + ": ").formatted(Formatting.GREEN, Formatting.BOLD))
+                                    .append(Text.literal(line.ability + ": ").formatted(Formatting.GREEN))
                                     .append(Text.literal(String.format("%02d:%02d", line.time / 60, line.time % 60))));
                         }
                     });

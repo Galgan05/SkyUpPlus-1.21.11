@@ -16,7 +16,7 @@ public class Reminders {
     private static String zawodyDate;
     private static String eventyDate;
 
-    public static void handleReminders() {
+    public static void register() {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
 
@@ -50,7 +50,7 @@ public class Reminders {
                 }
 
                 bodyText.add(Text.empty()
-                        .append(Text.literal("Zawody: ").formatted(Formatting.DARK_AQUA, Formatting.BOLD))
+                        .append(Text.literal("Zawody: ").formatted(Formatting.DARK_AQUA))
                         .append(Text.literal(zawodyDate)));
             }
 
@@ -79,7 +79,7 @@ public class Reminders {
                 }
 
                 bodyText.add(Text.empty()
-                        .append(Text.literal("Eventy: ").formatted(Formatting.DARK_PURPLE, Formatting.BOLD))
+                        .append(Text.literal("Eventy: ").formatted(Formatting.DARK_PURPLE))
                         .append(Text.literal(eventyDate)));
             }
 
@@ -92,7 +92,7 @@ public class Reminders {
 
             if (Config.get().toggleDaily && !Config.get().hasSeenDaily) {
                 bodyText.add(Text.empty()
-                        .append(Text.literal("Daily: ").formatted(Formatting.YELLOW, Formatting.BOLD))
+                        .append(Text.literal("Daily: ").formatted(Formatting.YELLOW))
                         .append(Text.literal("Dostępne")));
             }
 
