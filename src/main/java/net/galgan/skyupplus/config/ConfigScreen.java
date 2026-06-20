@@ -286,7 +286,9 @@ public final class ConfigScreen {
         Option<Config.ConditionalDisplayBehavior> skillsDisplayBehavior = Option.<Config.ConditionalDisplayBehavior>createBuilder()
                 .name(Text.literal("Statystyki prac"))
                 .description(OptionDescription.of(
-                        Text.literal("Zmienia kiedy mają się wyświetlać statystyki prac").formatted(Formatting.GRAY)
+                        Text.literal("Zmienia kiedy mają się wyświetlać statystyki prac").formatted(Formatting.GRAY),
+                        Text.empty(),
+                        Text.literal("UWAGA! Aby statystyki poprawnie się wyświetliły musisz zebrać expa danej pracy minimum 2 razy (np. wyłowić 2 ryby)!").formatted(Formatting.RED)
                 ))
                 .binding(Config.ConditionalDisplayBehavior.CONDITIONAL, () -> cfg.skillsDisplayBehavior, v -> cfg.skillsDisplayBehavior = v)
                 .controller(opt -> EnumControllerBuilder.create(opt)
