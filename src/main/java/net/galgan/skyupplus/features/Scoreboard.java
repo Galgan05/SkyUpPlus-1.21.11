@@ -27,6 +27,7 @@ public class Scoreboard {
     private static String level = "-";
     private static String limit = "-";
     private static String reset = "-";
+    private static String bonus = "-";
     private static List<Text> abilities = new ArrayList<>();
 
     private static boolean customScoreboard;
@@ -42,69 +43,35 @@ public class Scoreboard {
             cleanBody = getCustomBody(client);
 
             customScoreboard = false;
+            bonus = "-";
 
             for (String line : cleanBody) {
                 if (line.startsWith("Portfel")) {
                     customScoreboard = true;
-                    Matcher m = Pattern.compile("[\\d ,]+(?:\\.\\d+)?").matcher(line);
-                    if (m.find()) {
-                        double parsed = Double.parseDouble(m.group().trim().replace(",", ".").replace(" ", ""));
-                        sc = Number.format(parsed) + " SC";
-                    } else {
-                        sc = "-";
-                    }
+                    sc = parseDoubleField(line, "[\\d ,]+(?:\\.\\d+)?", " SC");
                 }
-                if (line.startsWith("Punkty")) {
-                    Matcher m = Pattern.compile("([\\d ]+)\\s*SP\\b").matcher(line);
-                    if (m.find()) {
-                        int parsed = Integer.parseInt(m.group(1).trim().replace(" ", ""));
-                        sp = parsed + " SP";
-                    } else {
-                        sp = "-";
-                    }
+                else if (line.startsWith("Punkty")) {
+                    sp = parseIntField(line, "([\\d ]+)\\s*SP\\b", " SP");
                 }
-                if (line.startsWith("Tokeny")) {
-                    Matcher m = Pattern.compile("([\\d ]+)\\s*ST\\b").matcher(line);
-                    if (m.find()) {
-                        int parsed = Integer.parseInt(m.group(1).trim().replace(" ", ""));
-                        st = parsed + " ST";
-                    } else {
-                        st = "-";
-                    }
+                else if (line.startsWith("Tokeny")) {
+                    st = parseIntField(line, "([\\d ]+)\\s*ST\\b", " ST");
                 }
-                if (line.startsWith("Bank")) {
-                    Matcher m = Pattern.compile("[\\d ,]+(?:\\.\\d+)?").matcher(line);
-                    if (m.find()) {
-                        double parsed = Double.parseDouble(m.group().trim().replace(",", ".").replace(" ", ""));
-                        bank = Number.format(parsed) + " SC";
-                    } else {
-                        bank = "-";
-                    }
+                else if (line.startsWith("Bank")) {
+                    bank = parseDoubleField(line, "[\\d ,]+(?:\\.\\d+)?", " SC");
                 }
-                if (line.startsWith("Poziom")) {
-                    Matcher m = Pattern.compile("Poziom:\\s*(-?[\\d ]+)").matcher(line);
-                    if (m.find()) {
-                        double parsed = Integer.parseInt(m.group(1).trim().replace(" ", ""));
-                        level = Number.format(parsed);
-                    } else {
-                        level = "-";
-                    }
+                else if (line.startsWith("Poziom")) {
+                    level = parseIntField(line, "Poziom:\\s*(-?[\\d ]+)", "");
                 }
-                if (line.startsWith("Limit")) {
-                    Matcher m = Pattern.compile("([\\d,]+/\\d+)").matcher(line);
-                    if (m.find()) {
-                        limit = m.group(1).replace(",", ".");
-                    } else {
-                        limit = "-";
-                    }
+                else if (line.startsWith("Limit")) {
+                    Matcher m = Pattern.compile("([\\d, ]+/[\\d ]+)").matcher(line);
+                    limit = m.find() ? m.group(1).trim().replace(" ", "").replace(",", ".") : "-";
                 }
-                if (line.startsWith("Reset")) {
-                    Matcher m = Pattern.compile("Reset limitu:\\s*(.+)").matcher(line);
-                    if (m.find()) {
-                        reset = m.group(1).trim();
-                    } else {
-                        reset = "-";
-                    }
+                else if (line.startsWith("Reset")) {
+                    reset = parseStringField(line, "Reset limitu:\\s*(.+)");
+                }
+                else if (line.contains("BONUS")) {
+                    int timeLeft = parseTimeToSeconds(line);
+                    bonus = timeLeft > 0 ? Number.formatTimeNoSeconds(timeLeft) : "-";
                 }
             }
 
@@ -143,6 +110,12 @@ public class Scoreboard {
                 .append(Text.literal("Reset: ").formatted(Formatting.GREEN))
                 .append(Text.literal(reset).formatted(Formatting.YELLOW)));
 
+        if (!bonus.equals("-")) {
+            bodyText.add(Text.empty()
+                    .append(Text.literal("Bonus: ").formatted(Formatting.GOLD))
+                    .append(Text.literal(bonus).formatted(Formatting.YELLOW)));
+        }
+
         if (abilities != null && !abilities.isEmpty()) {
             bodyText.addAll(abilities);
         }
@@ -178,9 +151,11 @@ public class Scoreboard {
 
             String lineString = line.getString();
 
-            if (lineString.startsWith(" §a§5") || lineString.startsWith("  »")) continue;
+            if (lineString.startsWith(" §a§5")) continue;
 
             lineString = lineString.replaceAll("§.", "");
+
+            if (lineString.startsWith("  »") && !lineString.contains("BONUS")) continue;
 
             if (lineString.chars().anyMatch(c -> ABILITY_CHARS.contains((char) c))) {
                 abilities.add(line);
@@ -225,5 +200,51 @@ public class Scoreboard {
         }
 
         return lines;
+    }
+
+    private static String parseDoubleField(String line, String regex, String suffix) {
+        Matcher m = Pattern.compile(regex).matcher(line);
+        if (m.find()) {
+            try {
+                String raw = m.group(m.groupCount() > 0 ? 1 : 0)
+                        .trim().replace(",", ".").replace(" ", "");
+                return Number.format(Double.parseDouble(raw)) + suffix;
+            } catch (NumberFormatException ignored) {}
+        }
+        return "-";
+    }
+
+    private static String parseIntField(String line, String regex, String suffix) {
+        Matcher m = Pattern.compile(regex).matcher(line);
+        if (m.find()) {
+            try {
+                String raw = m.group(1).trim().replace(" ", "");
+                return Integer.parseInt(raw) + suffix;
+            } catch (NumberFormatException ignored) {}
+        }
+        return "-";
+    }
+
+    private static String parseStringField(String line, String regex) {
+        Matcher m = Pattern.compile(regex).matcher(line);
+        if (m.find()) {
+            String v = m.group(1).trim();
+            return v.isEmpty() ? "-" : v;
+        }
+        return "-";
+    }
+
+    private static int parseTimeToSeconds(String line) {
+        int total = 0;
+        Matcher m = Pattern.compile("(\\d+)\\s*([gms])").matcher(line);
+        while (m.find()) {
+            int value = Integer.parseInt(m.group(1));
+            switch (m.group(2)) {
+                case "g" -> total += value * 3600;
+                case "m" -> total += value * 60;
+                case "s" -> total += value;
+            }
+        }
+        return total;
     }
 }

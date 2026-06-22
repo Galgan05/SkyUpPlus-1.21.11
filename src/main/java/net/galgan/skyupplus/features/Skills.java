@@ -23,14 +23,14 @@ public class Skills {
 
     static final Map<String, Long> WINDOW_CAPS = Map.of(
             "Rybak", 120000L,
-            "Drwal", 30000L,
-            "Górnik", 30000L,
-            "Farmer", 30000L,
+            "Drwal", 20000L,
+            "Górnik", 10000L,
+            "Farmer", 10000L,
             "Czarodziej", 120000L,
-            "Budowniczy", 30000L,
+            "Budowniczy", 10000L,
             "Łowca", 120000L
     );
-    static final long DEFAULT_WINDOW_CAP = 30000L;
+    static final long DEFAULT_WINDOW_CAP = 20000L;
 
     public static void register() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

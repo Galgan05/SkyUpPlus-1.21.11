@@ -83,4 +83,21 @@ public class Number {
 
         return negative ? "-" + result : result;
     }
+
+    public static String formatTimeNoSeconds(int number) {
+        boolean negative = number < 0;
+        number = Math.abs(number);
+
+        int hours = number / 3600;
+        int minutes = (number % 3600) / 60;
+
+        String result;
+        if (hours > 0) {
+            result = String.format("%dh %dm", hours, minutes);
+        } else {
+            result = String.format("%dm", minutes);
+        }
+
+        return negative ? "-" + result : result;
+    }
 }
